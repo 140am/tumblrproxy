@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ post_objs.blog.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div span="12">
+          <h1>{{ post_objs.blog.title }}</h1>
+          <p class="lead">{{ post_objs.blog.description }}</p>
+        </div>
+      </div>
+      {% for post in post_objs.posts %}
+      {% if post.state == 'published' %}
+      <div class="row">
+        <div class="span12">
+        {% if post.type == 'photo' %}
+          <a href="/{{ post.id }}-{{ post.slug }}">
+            <img src="{{ post.photos[0].original_size.url }}" class="img-polaroid">
+          </a>
+          <blockquote>
+            <p>{{ post.caption|safe }}</p>
+            <small>{{ post.date }}</small>
+          </blockquote>
+        {% else %}
+          <h3><a href="/{{ post.id }}-{{ post.slug }}">{{ post.title }}</a></h3>
+          <span class="muted">{{ post.date }}</span>
+          <p>{{ post.body|safe }}</p>
+        {% endif %}
+          <hr />
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </body>
+</html>

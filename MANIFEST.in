@@ -1,0 +1,2 @@
+include *.txt *.ini *.cfg *.rst *.md
+recursive-include tumblrproxy *.ico *.png *.css *.gif *.jpg *.pt *.txt *.mak *.mako *.jinja2 *.js *.html *.xml
