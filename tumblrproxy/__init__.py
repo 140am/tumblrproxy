@@ -1,4 +1,5 @@
 from pyramid.config import Configurator
+from jinja2.utils import import_string
 
 
 def main(global_config, **settings):
@@ -10,6 +11,9 @@ def main(global_config, **settings):
     config.include('pyramid_exclog')
     # https://docs.pylonsproject.org/projects/pyramid_jinja2/dev/api.html#pyramid_jinja2.includeme
     config.include('pyramid_jinja2')
+    config.get_jinja2_environment().filters.update({
+        'date_format' : import_string('tumblrproxy.lib.template_filter.date_format'),
+    })
 
     # view handler
     config.include('tumblrproxy.controllers.blog')
