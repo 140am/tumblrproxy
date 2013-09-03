@@ -13,6 +13,7 @@ def main(global_config, **settings):
     config.include('pyramid_jinja2')
     config.get_jinja2_environment().filters.update({
         'date_format' : import_string('tumblrproxy.lib.template_filter.date_format'),
+        'tumblr_video' : import_string('tumblrproxy.lib.tumblr_filter.video_embed')
     })
 
     # view handler
