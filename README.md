@@ -50,25 +50,16 @@ Update the `development.ini` file with your [Tumblr Application](http://www.tumb
 
 ### nginx Sample Configuration
 
-    upstream tumblrproxy-app {
-        server 127.0.0.1:6543;
-    }
-
     server {
         listen 80;
         server_name www.yoursite.tld;
 
         location /blog {
-            proxy_set_header  X-Real-IP  $remote_addr;
-            proxy_set_header Host $http_host;
-            proxy_set_header X-Forwarded-Host $host;
-            proxy_set_header X-Forwarded-Server $host;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-
-            if (!-f $request_filename) {
-                proxy_pass http://tumblrproxy-app;
-                break;
-            }
+            proxy_pass http://127.0.0.1:6543/;
+            proxy_connect_timeout 60;
         }
 
         root /www/yoursite.tld;
