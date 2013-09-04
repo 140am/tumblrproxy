@@ -36,13 +36,27 @@ def get_oauth_client(request):
 
 
 @view_config(route_name='post_list', renderer='blog/list.jinja2', request_method='GET')
+@view_config(route_name='post_list_tag', renderer='blog/list.jinja2', request_method='GET')
 def post_list(request):
 
     client = get_oauth_client(request)
 
-    post_objs = client.posts(request.registry.settings['tumblr.blog'], offset=0, limit=10)
+    if request.matchdict.get('tag_name'):
+        post_objs = client.posts(
+            request.registry.settings['tumblr.blog'],
+            tag=request.matchdict.get('tag_name'),
+            offset=0,
+            limit=10
+        )
+    else:
+        post_objs = client.posts(
+            request.registry.settings['tumblr.blog'],
+            offset=0,
+            limit=10
+        )
 
     return {
+        'tag_name' : request.matchdict.get('tag_name'),
         'post_objs' : post_objs
     }
 
