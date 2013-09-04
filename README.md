@@ -54,11 +54,13 @@ Update the `development.ini` file with your [Tumblr Application](http://www.tumb
         listen 80;
         server_name www.yoursite.tld;
 
-        location /blog {
+        location ~ ^/blog/?(.*)$ {
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_pass http://127.0.0.1:6543/;
+            if (!-f $request_filename) {
+                proxy_pass http://127.0.0.1:6543/$1;
+            }
             proxy_connect_timeout 60;
         }
 
