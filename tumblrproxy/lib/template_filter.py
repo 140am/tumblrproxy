@@ -13,3 +13,9 @@ def date_format(date_s, format=None):
         date_obj = date_s
 
     return date_obj
+
+def root_path(path):
+    if not path == '/':
+        return '%s/' % path
+    else:
+        return path

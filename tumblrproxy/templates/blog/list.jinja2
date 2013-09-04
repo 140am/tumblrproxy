@@ -18,12 +18,12 @@
       <div class="row">
         <div class="span12">
         {% if post.type == 'text' %}
-          <h3><a href="/{{ post.id }}-{{ post.slug }}">{{ post.title }}</a></h3>
+          <h3><a href="{{ root_path }}{{ post.id }}-{{ post.slug }}">{{ post.title }}</a></h3>
           <span class="muted">{{ post.date }}</span>
           <p>{{ post.body|safe }}</p>
         {% endif %}
         {% if post.type == 'photo' %}
-          <a href="/{{ post.id }}-{{ post.slug }}">
+          <a href="{{ root_path }}{{ post.id }}-{{ post.slug }}">
             <img src="{{ post.photos[0].original_size.url }}" class="img-polaroid">
           </a>
           <blockquote>

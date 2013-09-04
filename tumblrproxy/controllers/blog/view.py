@@ -5,6 +5,8 @@ import pytumblr
 
 from pyramid.view import view_config, notfound_view_config
 
+from tumblrproxy.lib.template_filter import root_path
+
 logging.basicConfig(level = logging.DEBUG)
 log = logging.getLogger(__name__)
 
@@ -56,6 +58,7 @@ def post_list(request):
         )
 
     return {
+        'root_path' : root_path(request.path_info),
         'tag_name' : request.matchdict.get('tag_name'),
         'post_objs' : post_objs
     }
@@ -66,9 +69,13 @@ def post_view(request):
 
     client = get_oauth_client(request)
 
-    post_objs = client.posts(request.registry.settings['tumblr.blog'], id=int(request.matchdict.get('post_id')))
+    post_objs = client.posts(
+        request.registry.settings['tumblr.blog'],
+        id=int(request.matchdict.get('post_id'))
+    )
 
     return {
+        'root_path' : root_path(request.path_info),
         'post_objs' : post_objs
     }
 
