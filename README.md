@@ -68,6 +68,12 @@ Update the `development.ini` file with your [Tumblr Application](http://www.tumb
     }
 
 
+## References
+
+* [http://www.tumblr.com/docs/en/api/v2](http://www.tumblr.com/docs/en/api/v2)
+* [http://www.tumblr.com/docs/en/custom_themes](http://www.tumblr.com/docs/en/custom_themes)
+
+
 ## MIT License
 
 > Copyright (c) 2013 Manuel Kreutz
