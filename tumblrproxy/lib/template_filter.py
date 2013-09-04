@@ -14,7 +14,11 @@ def date_format(date_s, format=None):
 
     return date_obj
 
-def root_path(path):
+def root_path(request):
+    if request.registry.settings.get('tumblr.root'):
+        path = request.registry.settings.get('tumblr.root')
+    else:
+        path = request.path_info
     if not path == '/':
         return '%s/' % path
     else:

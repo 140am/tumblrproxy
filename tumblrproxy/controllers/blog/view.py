@@ -58,7 +58,7 @@ def post_list(request):
         )
 
     return {
-        'root_path' : root_path(request.path_info),
+        'root_path' : root_path(request),
         'tag_name' : request.matchdict.get('tag_name'),
         'post_objs' : post_objs
     }
@@ -75,7 +75,7 @@ def post_view(request):
     )
 
     return {
-        'root_path' : root_path(request.path_info),
+        'root_path' : root_path(request),
         'post_objs' : post_objs
     }
 
